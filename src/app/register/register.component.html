@@ -1,0 +1,151 @@
+
+<br><br><hr>
+<h2 class="text-primary bold">Register Here:<i class="star">*</i></h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="border border-info p-2">
+          
+    <!-- Name Section -->
+        <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="firstName">First Name:<i class="star">*</i></label>
+        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label for="lastName">Last Name:<i class="star">*</i></label>
+        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+    </div>
+    </div>
+    
+  <!-- Email and  ContactNumber Section -->
+     
+  <div class="form-row">   
+        <div class="form-group col-md-6">
+        <label for="emailId">Email Account:<i class="star">*</i></label>
+        <input type="email" formControlName="emailId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+        <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+            <div *ngIf="f.emailId.errors.required">Email is required</div>
+            <div *ngIf="f.emailId.errors.pattern">This is not Geniune email</div>
+            
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label for="phoneNumber">Contact Number:<i class="star">*</i></label>
+        <input type="tel" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+        <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+            <div *ngIf="f.phoneNumber.errors.required">Contact Number is required</div>
+        </div> 
+        </div>
+    </div>
+    
+<!-- Gender and DOB Section -->
+
+<div class="form-row">
+<div class="form-group col-md-6">
+<label for="gender">Select Your Gender:<i class="star">*</i></label><br>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" formControlName="gender" value="male" checked>
+<label class="form-check-label" for="Radio1">Male</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" formControlName="gender" value="female">
+<label class="form-check-label" for="Radio2">Female</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" formControlName="gender" value="other">
+<label class="form-check-label" for="Radio3">Other</label>
+</div>
+<div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+    <small *ngIf="f.gender.errors.required">Gender is required</small>
+</div> 
+</div>     
+
+<div class="form-group col-md-6">
+<label for="dateBirth">Choose Your DOB:<i class="star">*</i></label><br> <!-- Ngx-Bootstrap DatePicker -->
+ <input type="text" formControlName="dateBirth" class="form-control" placeholder="choose DOB Format MM/DD/YYYY" 
+bsDatepicker  [minDate] ="minDate" [maxDate]="maxDate" value="dateBirth" [ngClass]="{ 'is-invalid': submitted && f.dateBirth.errors }">
+<div *ngIf="submitted && f.dateBirth.errors" class="invalid-feedback">
+<div *ngIf="f.dateBirth.errors.required">Date of Borth is required</div>
+</div>
+</div>
+</div>
+
+  <!-- UserName  anfd Password  Section -->
+    <div class="form-row">    
+        <div class="form-group col-md-6">
+        <label for="username">Username:<i class="star">*</i></label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="password">Password:<i class="star">*</i></label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    </div>
+
+<label for="adress"><u class="text-gray-dark">ADDRESS</u><i class="star">*</i></label>    <!-- Address Section -->
+<div class="form-row">    
+    <div class="form-group col-md-6">
+    <label for="street">Sreet:<i class="star">*</i></label>
+    <input type="text" formControlName="street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
+    <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+    <div *ngIf="f.street.errors.required">Street is required</div>
+    </div>
+</div>
+<div class="form-group col-md-6">
+    <label for="city">City:<i class="star">*</i></label>
+    <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+        <div *ngIf="f.city.errors.required">City is required</div>
+    </div>
+</div>
+</div>   
+    
+<div class="form-row">    
+    <div class="form-group col-md-4">
+    <label for="state">State:<i class="star">*</i></label>
+    <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+    <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+    <div *ngIf="f.state.errors.required">State is required</div>
+    </div>
+</div>
+<div class="form-group col-md-4">
+    <label for="pinCode">Pincode:<i class="star">*</i></label>
+    <input type="number" formControlName="pinCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pinCode.errors }" />
+    <div *ngIf="submitted && f.pinCode.errors" class="invalid-feedback">
+        <div *ngIf="f.pinCode.errors.required">Pincode is required</div>
+        <div *ngIf="f.pinCode.errors.minlength">Pincode must be at least 6 characters</div>
+        <div *ngIf="f.pinCode.errors.pattern">Pincode not Valid</div>
+    </div>
+</div>
+<div class="form-group col-md-4">
+    <label for="country">Country:<i class="star">*</i></label>
+    <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+    <div *ngIf="f.country.errors.required">Country is required</div>
+    </div>
+</div>
+</div>
+    <div class="form-group">
+        <button class="btn btn-primary" [disabled]="registerForm.invalid">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+        </button>
+        <a routerLink="/login" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+
+
+

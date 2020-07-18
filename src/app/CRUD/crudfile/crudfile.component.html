@@ -1,0 +1,58 @@
+<br><br><br>
+<div class="row">
+  <div class="col-md-4 border-right">
+
+    
+  <form #myform="ngForm">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Full Name</label>
+    <input type="text" class="form-control" name="Name" aria-describedby="emailHelp" [(ngModel)]="userObj.Name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Mobile Number</label>
+        <input type="tel" class="form-control" name="mobile"  aria-describedby="emailHelp" [(ngModel)]="userObj.mobile">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" [(ngModel)]="userObj.email">
+      </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" name="password" [(ngModel)]="userObj.password">
+    </div>
+    <button type="button"(click)="addUser(myform.value)" class="btn btn-primary" *ngIf="!isEdit">Submit</button>
+    <button type="button" class="btn btn-info" *ngIf="isEdit" (click)="updateUser()">Update</button>
+
+  </form>
+  </div>
+  <div class="col-md-8">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Full Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Email</th>
+          <th scope="col">Password</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of allUsers">
+            <td>{{user.Name}}</td>
+            <td>{{user.mobile}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
+            <td><button class="btn btn-info" (click)="EditUser(user)" title="Edit"><i class="fa fa-edit"></i>
+            </button></td>
+<td><button class="btn btn-danger" (click)="DeleteUser(user)"title="Delete"><i class="fa fa-trash"></i>
+</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+    
+
+

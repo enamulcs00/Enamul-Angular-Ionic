@@ -1,0 +1,49 @@
+<br><br><br>
+<div class="row">
+    <div class="col-md-6  border-right">
+        <u class="text-info"><h1>Add User</h1></u>
+        <form #userForm="ngForm" (ngSubmit)="AddUser(userForm.value)">
+            <div class="form-group">
+<input type="text" placeholder="User Name" class="form-control"name="name" ngModel required>
+            </div>
+            <div class="form-group">
+<input type="text" class="form-control" placeholder="Technology Name" name="technology" ngModel required>
+            </div>
+            
+            <div class="row">
+                <div class="col-3">
+<button class="btn btn-primary" type="submit">{{EditMode?'UpdateUser':'AddUser'}}</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-warning" type="button">Fetch</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <u class="text-primary"><h2>Users Details</h2></u>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.N</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Technology</th>
+                    <th scope="col" class="text-success">Edit</th>
+                    <th scope="col" class="text-warning">Delete</th>
+    
+            </thead>
+            <tbody>
+                <tr *ngFor="let tech of Technology; index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{tech.name}}</td>
+                    <td>{{tech.technology}}</td>
+                    
+    <td class="text-center"><a class="text-info" (click)="EditUser(tech.UserId,i)"><i class="fa fa-edit"></i></a></td>
+    <td  class="text-center"><a class="text-danger"(click)="DeletUser(tech.UserId)"><i class="fa fa-trash"></i></a></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- nav -->
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-success">      <!--*ngIf="currentUser"-->
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" (click)="LogFirst()">ALLUsers</a>
+        <a class="nav-item nav-link" routerLink="crudOperation">CrudJSON</a>
+        <a class="nav-item nav-link" routerLink="crudwithGfB">Firebase</a>
+        <a class="nav-item nav-link" routerLink="crudbypost">PostFb</a>
+        <a class="nav-item nav-link" routerLink="pipeOperation">Pipe</a>
+        <a class="nav-item nav-link" routerLink="contactform">Testing</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+<div class="jumbotron-fluid">
+    <div class="container-fluid">
+        <div>
+            <div>
+                <app-alert></app-alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

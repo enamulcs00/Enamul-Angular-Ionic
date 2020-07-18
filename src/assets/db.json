@@ -1,0 +1,146 @@
+{
+  "Employee": [
+    {
+      "Name": "Enamul haque",
+      "mobile": "8804256519",
+      "email": "enamulcs008@gmail.com",
+      "password": "Regional",
+      "id": 2
+    },
+    {
+      "username": "we",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 3
+    },
+    {
+      "username": "rfgn",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "default",
+      "subscribe": true,
+      "id": 4
+    },
+    {
+      "username": "fgh",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "React",
+      "timePreference": "default",
+      "subscribe": true,
+      "id": 5
+    },
+    {
+      "username": "zxc",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 6
+    },
+    {
+      "username": "gh",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 7
+    },
+    {
+      "username": "",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "morning",
+      "timePreference": "default",
+      "subscribe": true,
+      "id": 8
+    },
+    {
+      "username": "Enamul Haque",
+      "email": "enamulcs008@gmail.com",
+      "phone": "8946818146",
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 9
+    },
+    {
+      "username": "Enamul",
+      "email": "enamulg7@outlook.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 10
+    },
+    {
+      "username": "gfg",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "evening",
+      "subscribe": true,
+      "id": 11
+    },
+    {
+      "username": "njg",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "evening",
+      "subscribe": true,
+      "id": 12
+    },
+    {
+      "username": "Enam",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 13
+    },
+    {
+      "username": "Enamul",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 14
+    },
+    {
+      "username": "Badshah",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "React",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 15
+    },
+    {
+      "username": "Enamul",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Angular",
+      "timePreference": "morning",
+      "subscribe": true,
+      "id": 16
+    },
+    {
+      "username": "warn",
+      "email": "rob@test.com",
+      "phone": 8804256519,
+      "topic": "Vue",
+      "timePreference": "evening",
+      "subscribe": true,
+      "id": 17
+    }
+  ]
+}

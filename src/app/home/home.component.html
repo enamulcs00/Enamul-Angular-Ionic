@@ -1,0 +1,53 @@
+<h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in with Angular 8!!</p>
+<h3>All registered users:</h3>
+<!-- <ul style="list-style-type:none;">
+    <li *ngFor="let user of users;index as i">
+        {{i+1}}  -  {{user.username}} ({{user.firstName}} {{user.lastName}})
+        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+    </li>
+</ul> -->
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Fname</th>
+        <th>Lname</th>
+        <th>Uname</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Dob</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th>country</th>
+        <th>Trash</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users;index as i">
+        <td>{{i+1}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.emailId}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.dateBirth}}</td>
+        <td>{{user.street}}</td>
+        <td>{{user.city}}</td>
+        <td>{{user.state}}</td>
+        <td>{{user.pinCode}}</td>
+        <td>{{user.country}}</td>
+<td><a (click)="deleteUser(user.id)" class="btn text-danger"><i class="fa fa-trash"></i></a></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
