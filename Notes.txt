@@ -14,10 +14,39 @@ Best regards,
 [Your Name]
 
 
+_-------_-----_----
+
+Open sidebar
+ChatGPT 3.5
+
+User
+Email to employee for build fail due to his code change 
+
+ChatGPT
+Subject: Build Failure Notification
+
+Dear [Employee's Name],
+
+I hope this message finds you well. We wanted to inform you that the recent build failed, and our investigation points to changes made in the code associated with your recent contributions.
+
+Please review your recent code changes and address any issues or errors that might have led to the build failure at your earliest convenience. If you encounter challenges in identifying and resolving the issue, feel free to reach out to the development team for assistance.
+
+We appreciate your prompt attention to this matter and your commitment to maintaining the stability of our codebase.
+
+Thank you.
+
+Best regards,
+[Your Name]
+[Your Position]
+[Your Company]
+
+
 
 
 
 
 Message ChatGPT…
 
-ChatGPT can make mistakes. Consider checking important 
+ChatGPT can make mistakes. Consider checking important information.
+ChatGPT
+
