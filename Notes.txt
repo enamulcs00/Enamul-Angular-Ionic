@@ -1,27 +1,23 @@
- 3.5
+Subject: Urgent: Code Change Impact on Other Functions
 
-User
-Write email to assign bug to right person or backend team 
+Hi [Developer's Name],
 
-ChatGPT
-Subject: Bug Assignment - Urgent
+I hope this message finds you well. I wanted to bring to your attention that the recent code changes you made in the common file seem to be affecting other functions in the system. It's crucial that we address this issue promptly to avoid any disruptions.
 
-Dear [Team/Developer's Name],
+Could you please review your recent changes and assess the potential impact on other functions? If possible, let's schedule a brief meeting to discuss and find a resolution.
 
-I hope this email finds you well. We have identified a critical bug in [describe the feature/module] that requires immediate attention. After initial assessment, it seems to be related to the backend functionality.
-
-Could you please investigate and address this issue promptly? Your expertise in the backend domain will be crucial in resolving this bug efficiently.
-
-Details:
-
-Bug Description: [Provide a brief description of the bug]
-Affected Module/Feature: [Specify the module or feature where the bug is observed]
-Priority: Urgent
-Your prompt assistance in resolving this matter is highly appreciated. Feel free to reach out if you need further information or clarification.
-
-Thank you for your dedication to ensuring the stability and reliability of our system.
+Thank you for your prompt attention to this matter.
 
 Best regards,
+
 [Your Name]
 [Your Position]
-[Your Company]
+[Your Contact Information]
+
+
+
+
+
+Message ChatGPT…
+
+ChatGPT can make mistakes. Consider checking important 
