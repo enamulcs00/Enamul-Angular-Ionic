@@ -1,0 +1,1744 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthenticationService } from 'src/app/commonUI/services/authentication.service';
+import { ActivatedRoute } from '@angular/router';
+import { CommonDataService } from 'src/app/services/common-data-service';
+import { DatedFlowCriteriaComponent } from './dated-flow-criteria.component';
+import { FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef } from '@angular/core';
+import { AgGridModule } from 'ag-grid-angular';
+import { HttpClientModule } from '@angular/common/http';
+import { DatedFlowService } from 'src/app/services/dated-flow.service';
+import { DatedFlowServiceMock, DatedFlowServiceNoDataMock } from 'src/app/mockData/dated-flow.service.mock';
+import { CreateDropDownJsonService } from 'src/app/commonUI/multi-select-dropdown';
+import { MultiselectDropdown } from 'src/app/commonUI/multi-select-dropdown';
+import { DatePickerComponent, DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AppConfig } from 'src/app/constants/config';
+
+class MockAuthenticationService {
+  getCurrentUserId() {
+    return of({});
+  }
+}
+
+let mockCriteria = {
+  fromSlic: "0115",
+  origCtry: "US",
+  origDate: "2022-06-23",
+  origSlic: "0119",
+  origSort: "D",
+  service: "1DA",
+  uptoCtry: "US",
+  uptoSlic: "0442",
+  viaCtry: "US",
+  viaSlic: "9003",
+  viaSrt: "D2"
+}
+
+let mockSort = {
+  aggFunc: null,
+  colId: "0",
+  flex: null,
+  hide: false,
+  pinned: null,
+  pivot: false,
+  pivotIndex: null,
+  rowGroup: false,
+  rowGroupIndex: null,
+  sort: null,
+  sortIndex: null,
+  width: 70,
+}
+let slicData = [
+  {
+    "slicCode": "5500"
+  },
+  {
+    "slicCode": "5565"
+  },
+  {
+    "slicCode": "5509"
+  },
+  {
+    "slicCode": "5520"
+  },
+
+]
+let mockFilter = {
+  uptoSlic: {values: ["0102"], filterType: "set"}
+}
+// region detais object
+let regionDetails = {
+  region:"Europe",
+  regionInShort:"EUR",
+  regionDateFormat:'DD/MMM/YYYY'
+}
+// region detais object for US
+let _usDetails = {
+  region:"North America",
+  regionInShort:"US",
+  regionDateFormat:'MM/DD/YYYY'
+
+}
+const gridData = [{fromSlic
+  : 
+  "0001",
+  llnkday
+  : 
+  "0",
+  originCtry
+  : 
+  "US",
+  originSlic
+  : 
+  "1200",
+  originSort
+  : 
+  ".",
+  uptoCtry
+  : 
+  "US",
+  uptoSlic
+  : 
+  "9999",
+  viaCtry
+  : 
+  "US",
+  viaSlic
+  : 
+  "1200",
+  viaSort
+  : 
+  "L"}]
+
+  const gridvalue = {value:"1",
+data:{
+  viaLdateTime:"2022-06-23"
+}
+}
+  const gridvalue1 = {value:"AA",data:{
+    viaLdateTime:"2022-06-23"
+  }}
+describe('DatedFlowCriteriaComponent', () => {
+  let component: DatedFlowCriteriaComponent;
+  let fixture: ComponentFixture<DatedFlowCriteriaComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [DatedFlowCriteriaComponent, MultiselectDropdown],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [HttpClientModule, FormsModule, DatepickerModule, ReactiveFormsModule, AgGridModule.withComponents([])],
+      providers: [
+        FormBuilder,
+        CreateDropDownJsonService,
+        AppConfig,
+        CommonDataService,
+        ChangeDetectorRef,
+        { provide: AuthenticationService, useClass: MockAuthenticationService },
+        { provide: DatedFlowService, useClass: DatedFlowServiceMock },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              queryParams: {}
+            }
+          }
+        }
+      ]
+    })
+      .compileComponents();
+    fixture = TestBed.createComponent(DatedFlowCriteriaComponent);
+    component = fixture.componentInstance;
+    localStorage.setItem('dated-flow-criteria-state', JSON.stringify(mockCriteria));
+    localStorage.setItem('sortingStatus', JSON.stringify(mockSort));
+    localStorage.setItem('filterStatus', JSON.stringify(mockFilter));
+    localStorage.setItem('regionDetails',JSON.stringify(regionDetails))
+    fixture.detectChanges();
+  });
+// To test the creation of the component
+  it('should create', () => {
+    localStorage.setItem('dated-flow-criteria-state', JSON.stringify(mockCriteria));
+
+    expect(component).toBeTruthy();
+  });
+// to set values in criteria when data available in session
+  it('should test loadCriteria storage', () => {
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        showLoadingOverlay: () => {},
+        setRowData: () => {},
+        setFilterModel: () => {},
+        setColumnDefs: () => {},
+        hideOverlay:()=>{ } 
+      } as any,
+      columnApi: {
+        getAllColumns:() =>{},
+        resetColumnState: () => {},
+        autoSizeColumns: () => {},
+        applyColumnState: () => {}
+      } as any
+    }
+    component.searchCriteriaForm = component.createFormGroup()
+    let origSlicOpt =  { id: mockCriteria['origSlic'], name: mockCriteria['origSlic'] }
+    let viaSlicOptions = { id: mockCriteria['viaSlic'], name: mockCriteria['viaSlic'] }
+    let toSlicOptions = { id: mockCriteria['uptoSlic'], name: mockCriteria['uptoSlic'] }
+    localStorage.setItem('dated-flow-criteria-state', JSON.stringify(mockCriteria));
+    component.loadCriteriaFromStorage()
+    expect(component.selectedStartDate).toBeDefined();
+    expect(component.defaultSelectedService[0]).toEqual("1DA")
+    expect(component.origCountry).toEqual(mockCriteria.origCtry)
+    expect(component.originSlicOptions).toEqual(origSlicOpt)
+    expect(component.viaCountry).toEqual(mockCriteria.viaCtry)
+    expect(component.viaSlicOptions).toEqual(viaSlicOptions)
+    expect(component.toSlicOptions).toEqual(toSlicOptions)
+    expect(component.searchCriteriaForm.value.serviceLevel[0]).toEqual('1DA');
+ });
+
+// to set values in default field of criteria when data not available in session.
+
+ it('should test loadCriteria storage for empty criteria', () => {
+  component.gridOptions = {
+    api: {
+      applyTransactionAsync: () => { },
+      flushAsyncTransactions: () => { },
+      showLoadingOverlay: () => {},
+      setRowData: () => {},
+      setFilterModel: () => {},
+      setColumnDefs: () => {},
+      hideOverlay:()=>{ } 
+    } as any,
+    columnApi: {
+      getAllColumns:() =>{},
+      resetColumnState: () => {},
+      autoSizeColumns: () => {},
+      applyColumnState: () => {}
+
+    } as any
+  }
+  localStorage.setItem('regionDetails',JSON.stringify(_usDetails))
+  component.searchCriteriaForm = component.createFormGroup()
+  localStorage.setItem('dated-flow-criteria-state','');
+  const spy = spyOn(component,'DropdownSelection')
+  component.loadCriteriaFromStorage()
+  expect(component.searchCriteriaForm.value.originCC[0]).toEqual('US');
+  expect(component.searchCriteriaForm.value.viaCC[0]).toEqual('US');
+  expect(spy).toHaveBeenCalledWith(['US'], 'countryOptions')
+});
+// To Reset the criteria form
+  it('should test reset search', () => {
+    component.selected_country = "US"
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        showLoadingOverlay: () => {},
+        setRowData: () => {},
+        setFilterModel: () => {},
+        hideOverlay:()=>{ },
+        setColumnDefs: () => {},
+
+      } as any,
+      columnApi: {
+        getAllColumns: () =>{},
+        autoSizeColumns: () => {},
+        resetColumnState: () => {}
+      } as any
+    }
+    component.datedFlowService={
+      UnsubscribeApiCall:()=>{}
+    } as any
+
+    const spy = spyOn(component,'DropdownSelection')
+    component.resetSearch();
+    expect(component.fromSlicOptions).toEqual([]);
+    expect(component.originSlicOptions).toEqual([]);
+    expect(component.toSlicOptions).toEqual([]);
+    expect(component.viaSlicOptions).toEqual([]);
+  expect(component.searchCriteriaForm.value.originCC[0]).toEqual('US');
+  expect(component.searchCriteriaForm.value.viaCC[0]).toEqual('US');
+  expect(spy).toHaveBeenCalledWith(['US'], 'countryOptions')
+  });
+  // to keep selected item on top of the dropdown  
+  it('should test dropdown selection',()=>{
+    let result = {id:"2DA",name:"2DA"}
+    component.serviceOptions = [{id:"1DA",name:"1DA"},{id:"2DA",name:"2DA"},{id:"3DS",name:"3DS"},{id:"GND",name:"GND"}]
+    component.DropdownSelection(["2DA"],'serviceOptions');
+    expect(component.serviceOptions[0]).toEqual(result);
+    expect(component.DropdownSelection(['2DA'],'serviceOptions')).toBeUndefined() 
+  });
+
+  //To Fetch data from api on the basis of criteria 
+
+  it('should test getData based on Criteria', () => {
+    component.gridOptions = {
+        api: {
+          applyTransactionAsync: () => { },
+          flushAsyncTransactions: () => { },
+          showLoadingOverlay: () => {},
+          setRowData: () => {},
+          setFilterModel: () => {},
+          hideOverlay:()=>{ } ,
+          setColumnDefs: () => {},
+        } as any,
+        columnApi: {
+          getAllColumns:() =>{},
+          autoSizeColumns: () => {},
+          resetColumnState: () => {}
+        } as any
+      }
+    const spy = spyOn(component, "getData");
+
+    component.datedFlowService={
+      UnsubscribeApiCall:()=>{}
+    } as any
+    component.submitSearch();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  // to show and hide the search criteria section
+
+  it('should test toggle search panel', () => {
+    component.showSearchPanel = true;
+    component.toggleSearchPanel();
+    expect(component.showSearchPanel).toBeFalsy();
+  });
+
+  //it will test fetchStreamingData function for fetching streaming data
+
+  it('should call fetchStreamingData function ', () => {
+  component.searchCriteriaForm = component.createFormGroup()
+  localStorage.setItem('datedFlowFormSubmited', 'true')
+  component.selectedStartDate = mockCriteria['origDate']
+  component.searchCriteriaForm.controls['serviceLevel'].patchValue(["1DA"])
+  component.lastCountOfRecordsFromStream =10;
+  const spy1 = spyOn(component,'frameDatedFlowRequest')
+  const spy2 = spyOn(component,'fetchStreamingData')
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        showLoadingOverlay: () => { },
+        setColumnDefs: () => {},
+        hideOverlay:()=>{ } ,
+          setRowData: () => { },
+      } as any,
+      columnApi: {
+         autoSizeColumns: () => {},
+        getAllColumns: () => [{
+          getColDef: () => {
+            return {
+              headerName: '',
+              colId: ''
+            }
+          },
+          getId:  () => { }
+        },
+        {
+          getColDef: () => {
+            return {
+              headerName: 'OrgSLIC',
+              colId: 'SLIC'
+            }
+          },
+          getId:  () => { }
+        }],
+        setColumnsVisible: () => { },
+        
+
+      } as any
+    }
+    
+     component.getData();
+   expect(spy1).toHaveBeenCalled()
+   expect(spy2).toHaveBeenCalled()
+   });
+  
+  // to  fetch slic info on cell click of origin slic column
+  it('should fetch slic info on cell click of origin slic column', () => {
+    const params = {
+      colDef: {
+        headerName: 'OrgSLIC',
+        field: 'originSlic',
+      },
+      data: {
+        originCtry: 'US',
+        originSlic: '2345'
+      }
+    }
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        showLoadingOverlay: () => { },
+        hideOverlay:()=>{ } ,
+        setColumnDefs: () => {},
+          setRowData: () => { }
+      } as any,
+      columnApi: {
+        autoSizeColumns: () => {},
+        getAllColumns: () => [{
+          getColDef: () => {
+            return {
+              headerName: '',
+              colId: ''
+            }
+          },
+          getId:  () => { }
+        },
+        {
+          getColDef: () => {
+            return {
+              headerName: 'OrgSLIC',
+              colId: 'SLIC'
+            }
+          },
+          getId:  () => { }
+        }],
+        setColumnsVisible: () => { },
+      
+
+      } as any
+    }
+    component.onCellClicked(params);
+    expect(component.slicInfo).toEqual('Slic Info: US 0119');
+    expect(component.showSlicInfo).toBeTruthy();
+  });
+// To fetch slic info on cell click of via slic column
+  it('should fetch slic info on cell click of via slic column', () => {
+    const params = {
+      colDef: {
+        headerName: 'ViaSLIC',
+        field: 'viaSlic'
+      },
+      data: {
+        viaCtry: 'US',
+        viaSlic: '2345'
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.slicInfo).toEqual('Slic Info: US 0119');
+    expect(component.showSlicInfo).toBeTruthy();
+  });
+// To fetch slic info for destn ranges
+  it('should fetch slic info for destn ranges', () => {
+    const params = {
+      colDef: {
+        headerName: ''
+      },
+      data: {
+        originCtry: 'US',
+        originSlic: '2345',
+        originSort: 'S',
+        uptoCtry: 'US',
+        fromSlic: '2000',
+        uptoSlic: '4000'
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.modalGridData).toEqual([]);
+    expect(component.showSlicGridInfo).toBeTruthy();
+  });
+// To fetch sort info on cell click of origin sort column
+  it('should fetch sort info on cell click of origin sort column', () => {
+    const params = {
+      colDef: {
+        headerName: 'OrgSrt',
+        field: 'originSort',
+      },
+      data: {
+        originCtry: 'US',
+        originSort: 'S2',
+        originSlic: '0119'
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.showNoSortTemp?component.showNoSortTemp:true).toBeTruthy();
+    expect(!component.showSortTemp?component.showSortTemp:false).toBeFalsy();
+    expect(component.showSortTranslate).toBeTruthy()
+  });
+
+  //Test case for onOrigSlicInputData
+  it('it should call onOrigSlicInputData', () => {
+    component.onOrigSlicInputData(slicData)
+    expect(component.slicLoading).toBeFalsy()
+    expect(component.originSlicOptions).not.toBeFalsy()
+  })
+
+  //Test case for onDestSlicLowInputData
+  it('it should call onDestSlicLowInputData function', () => {
+    component.onDestSlicLowInputData(slicData);
+    expect(component.fromSlicRngLoading).toBeFalsy();
+  })
+//Test case for onViaSlicInputData
+  it('it should call onViaSlicInputData function ', () => {
+
+    component.onViaSlicInputData(slicData)
+    expect(component.viaSlicLoading).toBeFalsy()
+    expect(component.viaSlicLoading).toBeFalsy()
+  })
+//Positive test case scenario for onDestSlicHighInputSwitchMap
+  it('onDestSlicHighInputSwitchMap', () => {
+    component.onDestSlicHighInputSwitchMap("23");
+    expect(component.toSlicRngLoading).toBeTrue();
+  });
+
+    //Negative test case scenario for onDestSlicHighInputSwitchMap
+    it('onDestSlicHighInputSwitchMap userInput less than 1', () => {
+      component.onDestSlicHighInputSwitchMap("2");
+     expect(component.toSlicRngLoading).toBeFalsy();
+    });
+// test  onDestSlicHighInputData function
+  it('should test onDestSlicHighInputData function', () => {
+    let data = [{id: "45SXC",name: "45SXC"}];
+    component.onDestSlicHighInputData(data);
+    expect(component.toSlicRngLoading).toBeFalsy();
+  });
+
+//Positive test case scenario for onDestSlicLowInputSwitchMap
+  it('onDestSlicLowInputSwitchMap', () => {
+    component.onDestSlicLowInputSwitchMap("23");
+    expect(component.fromSlicRngLoading).toBeTrue();
+  });
+
+  //Negative test case scenario for onDestSlicLowInputSwitchMap 
+  it('onDestSlicLowInputSwitchMap userInput less than 1', () => {
+    component.onDestSlicLowInputSwitchMap("2");
+    expect(component.fromSlicRngLoading).toBeFalsy();
+  });
+
+//Positive test case scenario for onOrigSlicInputSwitchMap
+  it('should test  onOrigSlicInputSwitchMap function', () => {
+    let request = {
+      ctry: "US",
+      search:  "23"  
+    };
+    component.onOrigSlicInputSwitchMap("23");
+    expect(component.frameSlicSearchRequest("US","23")).toEqual(request);
+  });
+   //Negatice test case scenario for onOrigSlicInputSwitchMap
+   it('onOrigSlicInputSwitchMap', () => {
+    component.onOrigSlicInputSwitchMap("2");
+    expect(component.slicLoading).toBeFalsy();
+  });
+
+    //Positive test case scenario for onViaSlicInputSwitchMap
+  it('onViaSlicInputSwitchMap', () => {
+    let request = {
+      ctry: "US",
+      search:  "23"  
+    };
+    component.onViaSlicInputSwitchMap("23");
+    expect(component.frameSlicSearchRequest("US","23")).toEqual(request);
+  });
+
+ //Negative test case scenario for  onViaSlicInputSwitchMap
+    it('onViaSlicInputSwitchMap for less than 1', () => {
+      component.onViaSlicInputSwitchMap("2");
+        expect(component.viaSlicLoading).toBeFalsy();
+      });
+// To hide confirmation modal
+  it('should hide confirmation modal', () => {
+    component.showSlicInfo=false;
+    component.showSlicGridInfo=false;
+    component.hideConfirmationModal();
+    expect(component.showSlicInfo).toBeFalsy();
+    expect(component.showSlicGridInfo).toBeFalsy();
+  });
+  // To test exported data in csv format
+  it('should export data in csv format ', () => {
+    var excelParams = {
+      fileName: 'Dated Flow Report - Bigs',
+      columnKeys: [],
+      sheetName: 'Flow-1'
+    }
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        setColumnDefs: () => {},
+        exportDataAsCsv:(excelParams) =>{
+
+        }
+      }as any,
+     
+      columnApi: {
+        autoSizeColumns: () => {},
+        getAllColumns: () =>{},
+      getAllDisplayedColumns: () =>[ {
+      getColDef:()=>{
+        return {
+            headerName :''
+        }
+        }
+      },
+      {
+        getColDef:()=>{
+          return {
+              headerName :'Origin Slic'
+          }
+          }
+      }]
+      
+       } as any
+    }
+    const spy = spyOn(component.gridOptions.api, "exportDataAsCsv");
+    component.export();
+    expect(spy).toHaveBeenCalled();
+   
+  });
+//Positive test case for filter change
+  it('should call filter changed', () => {
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        setColumnDefs: () => {},
+         getFilterModel: () => {}
+         } as any,
+         columnApi: {
+          autoSizeColumns: () => {},
+          getAllColumns: () => [{
+            getColDef: () => {
+              return {
+                headerName: '',
+                colId: ''
+              }
+            },
+            getId:  () => { }
+          },
+          {
+            getColDef: () => {
+              return {
+                headerName: 'OrgSLIC',
+                colId: 'SLIC'
+              }
+            },
+            getId:  () => { }
+          }],
+          setColumnsVisible: () => { },
+         
+  
+        } as any
+    }
+    const spy = spyOn(localStorage, "setItem");
+    component.filterChanged();
+    expect(spy).toHaveBeenCalled();
+   
+  });
+
+  //negative scenario for gridStyle
+  it('should call grid Style', () => {
+    component.isGLSubWindow = false;
+    component.showSearchPanel = true;
+    let result =  component.getGridStyle();
+    expect(result).toBe('grid-style')
+  });
+//positive test case scenarios for gridstyle
+  it('should call grid Style', () => {
+    component.isGLSubWindow = true;
+    component.showSearchPanel = true;
+    let result =  component.getGridStyle();
+    expect(result).toBe('gl-grid-style')
+  });
+  //Test case for Streaming Data API call
+  it('Request body should not be empty', () => {
+  localStorage.setItem('dated-flow-criteria-state', JSON.stringify(mockCriteria));
+  component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        hideOverlay:()=>{ },
+        setColumnDefs:()=>{}   
+      } as any,
+      columnApi: {
+        autoSizeColumns: () => {},
+        getAllColumns: () => [{
+          getColDef: () => {
+            return {
+              headerName: '',
+              colId: ''
+            }
+          },
+          getId:  () => { }
+        },
+        {
+          getColDef: () => {
+            return {
+              headerName: 'OrgSLIC',
+              colId: 'SLIC'
+            }
+          },
+          getId:  () => { }
+        }],
+        setColumnsVisible: () => { },
+       
+
+      } as any
+    }
+ component.gridOptions.api?.applyTransactionAsync({ add: gridData }, () => {
+    component.gridOptions.api?.flushAsyncTransactions();
+    });
+  component.fetchStreamingData();
+  let gridDataObj = []
+  gridDataObj = component.createColumnDef()
+  if(gridData && gridDataObj.length > 0) {
+    gridDataObj.forEach(obj => {
+   if (obj.children && obj.children.length > 0) {
+        obj.children.forEach(childEl => {
+          if (childEl.cellRenderer) {
+            //for values having length 1
+            expect(childEl.cellRenderer(gridvalue)).toBeDefined()
+            // for values having length 2
+            expect(childEl.cellRenderer(gridvalue1)).toBeDefined()
+            // for null values
+          }
+        })
+      }
+
+    })
+  }
+  expect(component.datedFlowRequest).not.toBeNull()
+  });
+//Test case for common API calls
+  it('Call Function to get Common api data', () => {
+    component.getCommonApiValues();
+    //expect(component.serviceOptions).not.toBeNull()
+    expect(component.countryOptions).not.toBeNull()
+    expect(component.sortOptions).not.toBeNull()
+   });
+    //Positive test case for sortingChanged
+   it('Local storage should have value for key: <sortingStatus>', () => {
+    component.sortChanged()
+    expect(localStorage.getItem('sortingStatus')).not.toBeNull()
+  })
+
+  //Test Caseif the user Input is greater than 2, API is called to fetch data*/
+  it('Should call keyUpEvent fromSlicRng', () => {
+    let event={
+      target:{
+        value :'21'
+      },
+      keyCode:49
+    }
+    const spy = spyOn(component.destSlicLowInput,'next');
+    component.keyUpEventDelay(event,'fromSlicRng');
+   expect(spy).toHaveBeenCalledWith(event.target.value)
+    
+  })
+// to test keyUpEvent function for toSlicRng input values
+
+  it('Should call keyUpEvent for toSlicRng', () => {
+    let event={
+      target:{
+        value :'21'
+      },
+      keyCode:49
+    }
+    const spy = spyOn(component.destSlicHighInput,'next');
+    component.keyUpEventDelay(event,'toSlicRng');
+   expect(spy).toHaveBeenCalledWith(event.target.value)
+    
+  })
+// to test keyUpEvent function for originSlic input values
+
+  it('Should call keyUpEvent for originSlic', () => {
+    let event={
+      target:{
+        value :'21'
+      },
+      keyCode:49
+    }
+    const spy = spyOn(component.origSlicInput,'next');
+    component.keyUpEventDelay(event,'originSlic');
+   expect(spy).toHaveBeenCalledWith(event.target.value)
+    
+  })
+// to test keyUpEvent function for viaSlic input values
+  it('Should call keyUpEvent for viaSlic', () => {
+    let event={
+      target:{
+        value :'21'
+      },
+      keyCode:49
+    }
+    const spy = spyOn(component.viaSlicInput,'next');
+    component.keyUpEventDelay(event,'viaSlic');
+   expect(spy).toHaveBeenCalledWith(event.target.value)
+    
+  })
+// To fetch sort info on cell click of origin sort column
+  it('should fetch sort info on cell click of origin sort column', () => {
+    const params = {
+      colDef: {
+        headerName: 'OrgSrt',
+        field: 'originSort',
+      },
+      data: {
+        originCtry: 'US',
+        originSort: 'S2',
+        originSlic: '0119'
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.showNoSortTemp?component.showNoSortTemp:true).toBeTruthy();
+    expect(!component.showSortTemp?component.showSortTemp:false).toBeFalsy();
+    expect(component.showSortTranslate).toBeTruthy()
+  });
+// to update criteria in local storage on every values changes
+  it('should call on every formvalues changes',()=>{
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        flushAsyncTransactions: () => { },
+        showLoadingOverlay: () => {},
+        setRowData: () => {},
+        setFilterModel: () => {},
+        setColumnDefs: () => {},
+        hideOverlay:()=>{ } 
+      } as any,
+      columnApi: {
+        getAllColumns:() =>{},
+        resetColumnState: () => {},
+        applyColumnState: () => {},
+        autoSizeColumns: () => {}, 
+      } as any
+    }
+    component.loadCriteriaFromStorage()
+    component.searchCriteriaForm = component.createFormGroup()
+    const spy = spyOn(component,'commonCriteria')
+    component.comService.changeInDate.next({ "startDate": true })
+    component.ngAfterViewChecked()
+    expect(spy).toHaveBeenCalled()
+  })
+  afterAll(() => {
+  localStorage.setItem('dated-flow-criteria-state', JSON.stringify(mockCriteria));
+
+    TestBed.resetTestingModule();
+
+  });
+});
+
+
+===============second One Help++++++++++
+
+import { HttpClientModule } from '@angular/common/http';
+import { ChangeDetectorRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { AgGridModule } from 'ag-grid-angular';
+import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CreateDropDownJsonService, MultiselectDropdown } from 'src/app/commonUI/multi-select-dropdown';
+import { AuthenticationService } from 'src/app/commonUI/services/authentication.service';
+import { AppConfig } from 'src/app/constants/config';
+import { DatedFlowServiceMock } from 'src/app/mockData/dated-flow.service.mock';
+import { CommonDataService } from 'src/app/services/common-data-service';
+import { DatedFlowService } from 'src/app/services/dated-flow.service';
+
+import { DatedFlowPathComponent } from './dated-flow-path.component';
+import { MockDatedFlowPathService } from 'src/app/mockData/dated-flow-path.service.mock';
+import {DatedflowPathService} from 'src/app/services/datedflow-path.service'
+
+class MockAuthenticationService {
+  getCurrentUserId() {
+    return { subscribe: () => { } };
+  }
+}
+export default class FlowBrowserConstants {
+  public static ORIGIN_SLIC = 'Orig SLIC';
+  public static VIA_SLIC = 'Via SLIC';
+  public static ORIGIN_SORT = 'Orig Sort';
+  public static VIA_SORT = 'Via Sort';
+}
+
+const defaultParams = {
+  data:{
+    datedflowPathDateSvcTnt:{flowPathDate : "13 DEC, 2022",
+    service:'1DA',calDays :'1',tnt :'1'
+  },
+  datedFlowPathOrigin:{
+    origCtry : "US",
+    origSlic:'1200',
+    origSrt:'L2'
+  },
+  datedFlowPathDestination:{
+    dlyCtry : "US",
+    dlySlic:'2201'
+  },
+  datedFlowPathVia:[{date: '13-DEC-2022', viaCtry: 'US', viaSlic: '1229', viaSort: 'T', viaTnt: '0'},
+  {date: '13-DEC-2022', viaCtry: 'US', viaSlic: '1159', viaSort: 'N2', viaTnt: '0'},
+  {date: '14-DEC-2022', viaCtry: 'US', viaSlic: '1159', viaSort: 'P2', viaTnt: '1'},
+  {date: '14-DEC-2022', viaCtry: 'US', viaSlic: '1100', viaSort: 'L2', viaTnt: '0'}]
+  }
+}
+
+const specialParams = {
+  data:{
+    datedflowPathDateSvcTnt:{flowPathDate : "13 DEC, 2022",
+    service:'1DA',calDays :'1',tnt :'1'
+  },
+  datedFlowPathOrigin:{
+    origCtry : "AA",
+    origSlic:'1200',
+    origSrt:'.'
+  },
+  datedFlowPathDestination:{
+    dlyCtry : "AA",
+    dlySlic:'2201'
+  },
+  datedFlowPathVia:[{date: '13-DEC-2022', viaCtry: 'US', viaSlic: '1229', viaSort: 'T', viaTnt: '0'},
+  {date: '13-DEC-2022', viaCtry: 'AA', viaSlic: '1159', viaSort: 'N', viaTnt: '0'},
+  {date: '14-DEC-2022', viaCtry: '**', viaSlic: '1159', viaSort: 'P', viaTnt: '1'},
+  {date: '14-DEC-2022', viaCtry: 'AA', viaSlic: '1100', viaSort: '.', viaTnt: '0'}]
+  }
+}
+
+// region detais object
+let regionDetails = {
+  region:"Europe",
+  regionInShort:"EUR",
+  regionDateFormat:'DD/MMM/YYYY'
+}
+
+// US detais object
+let regionDetailsForUs = {
+  region:"North America",
+  regionInShort:"US",
+  regionDateFormat:'MM/DD/YYYY'
+
+}
+
+let mockCriteria = {
+  "service": "1DA",
+  "origCtry": "US",
+  "origSlic": "2000",
+  "origSort": ".",
+  "destCtry": "US",
+  "destSlic": "2000",
+  "startDate": "2022-06-01",
+  "endDate": "2022-07-27"
+}
+
+let dated_flow_path_criteria = {
+  "service": "1DA",
+  "origCtry": "US",
+  "origSlic": "2000",
+  "origSort": ".",
+  "destCtry": "US",
+  "destSlic": "",
+  "startDate": "2022-06-01",
+  "endDate": "2022-07-27",
+  "pendingAlternates":true
+  
+}
+
+let default_criteria = {
+  "service": "1DA",
+  "origCtry": "US",
+  "origSlic": "2000",
+  "origSort": ".",
+  "destCtry": "US",
+  "destSlic": "",
+  "startDate": "2022-06-01",
+  "endDate": "2022-07-27",
+  "pendingAlternates":true,
+  'state': 0
+}
+let appendedArray = [{destCtry
+  : 
+  "US",
+  destSlic
+  : 
+  "1100",
+  endDate
+  : 
+  "2022-11-01",
+  origCtry
+  : 
+  "US",
+  origSlic
+  : 
+  "11PRM",
+  origSort
+  : 
+  ".",
+  pendingAlternates
+  : 
+  true,
+  service
+  : 
+  "1DA",
+  startDate
+  : 
+  "2022-11-01",
+  state
+  : 
+  1}]
+let minMaxForPending = [{"minDate":null,"maxDate":"2022-11-30 00:00:00"}]
+let mockSort = {
+  aggFunc: null,
+  colId: "0",
+  flex: null,
+  hide: false,
+  pinned: null,
+  pivot: false,
+  pivotIndex: null,
+  rowGroup: false,
+  rowGroupIndex: null,
+  sort: null,
+  sortIndex: null,
+  width: 70,
+}
+let slicData = [
+  {
+    "slicCode": "5500"
+  },
+  {
+    "slicCode": "5565"
+  },
+  {
+    "slicCode": "5509"
+  },
+  {
+    "slicCode": "5520"
+  },
+
+]
+let mockFilter = {
+  uptoSlic: { values: ["0102"], filterType: "set" }
+}
+
+//let mapToColId=(col: any)=>{ return col.colId; }
+
+describe('DatedFlowPathComponent', () => {
+  let component: DatedFlowPathComponent;
+  let fixture: ComponentFixture<DatedFlowPathComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [DatedFlowPathComponent, MultiselectDropdown],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [HttpClientModule, FormsModule, DatepickerModule, ReactiveFormsModule, AgGridModule.withComponents([])],
+      providers: [
+        FormBuilder,
+        CreateDropDownJsonService,
+        AppConfig,
+        CommonDataService,
+        ChangeDetectorRef,
+        { provide: AuthenticationService, useClass: MockAuthenticationService },
+        { provide: DatedFlowService, useClass: DatedFlowServiceMock },
+        { provide: DatedflowPathService, useClass: MockDatedFlowPathService } ,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              queryParams: {}
+            }
+          }
+        }
+      ]
+    })
+      .compileComponents();
+    localStorage.setItem('datedFlowPathFormSubmited', 'true')
+    localStorage.setItem('dated-flow-path-state', JSON.stringify(mockCriteria));
+    localStorage.setItem('dated-flow-path-sortingStatus', JSON.stringify(mockSort));
+    localStorage.setItem('dated-flow-path-filterStatus', JSON.stringify(mockFilter));
+    localStorage.setItem('dated-flow-path-appended-criteria',JSON.stringify(appendedArray))
+    localStorage.setItem('regionDetails',JSON.stringify(regionDetails))
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DatedFlowPathComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should test datechange in common service for start date',()=>{
+    let params = { "startDate": true }
+    const spy = spyOn(component,'commonCriteriaDateSetting')
+    component.comService.changeInDate.next(params)
+   component.ngAfterViewChecked()
+   expect(spy).toHaveBeenCalledWith(params)
+  })
+
+  it('should test datechange in common service for end date',()=>{
+    let params = { "endDate": true }
+    const spy = spyOn(component,'commonCriteriaDateSetting')
+   component.comService.changeInDate.next(params)
+   component.ngAfterViewChecked()
+   expect(spy).toHaveBeenCalledWith(params)
+
+ });
+
+ it('should call ngOnInit',()=>{
+   const spy = spyOn(component,'createFormGroup')
+   const spy1 = spyOn(component,'getCommonApiValues')
+   const spy2 = spyOn(component,'forSlicSearch')
+   const spy3 = spyOn(component,'loadCriteriaFromStorage')
+   component.ngOnInit()
+   expect(component.blockOnLoad).toEqual(0);
+expect(spy).toHaveBeenCalled();
+expect(spy1).toHaveBeenCalled();
+expect(component.isGLSubWindow).toBeDefined()
+expect(component.dataUnavailable).toBeTrue()
+expect(spy2).toHaveBeenCalled();
+expect(spy3).toHaveBeenCalled()
+expect(component.ngOnInit()).toBeUndefined()
+ })
+
+ it('should set value in localstorage on start date by calling commonCriteriaDateSetting function',()=>{
+  component.searchCriteriaForm = component.createFormGroup()
+  mockCriteria['state'] = 0;
+  mockCriteria['pendingAlternates'] = false;
+  let params = { "startDate": true }
+  component.selectedStartDate = "2022-06-01",
+   component.commonCriteriaDateSetting(params)
+   delete mockCriteria['endDate']
+   expect(JSON.parse(localStorage.getItem('dated-flow-path-criteria-ondoc'))).toBeDefined()
+
+ })
+ it('should set value in localstorage on end date by calling commonCriteriaDateSetting function',()=>{
+  component.searchCriteriaForm = component.createFormGroup()
+  mockCriteria['state'] = 0;
+  mockCriteria['pendingAlternates'] = false;
+  let params = { "endDate": true }
+  component.selectedEndDate = "2022-07-27"
+   component.commonCriteriaDateSetting(params)
+   delete mockCriteria['startDate']
+   expect(JSON.parse(localStorage.getItem('dated-flow-path-criteria-ondoc'))).toBeDefined()
+
+ })
+
+ it('should test reset search', () => {
+   component.selected_country = "US"
+   const spy=spyOn(component,'DropdownSelection')
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        showLoadingOverlay: () => { },
+        setRowData: () => { },
+        setFilterModel: () => { },
+        hideOverlay :() => {}
+      } as any,
+      columnApi: {
+        resetColumnState: () => { },
+        applyColumnState:() => { }
+      } as any
+    }
+    component.resetSearch();
+    expect(component.origCountry).toEqual("US")
+    expect(component.origSlicOptions).toEqual([]);
+    expect(spy).toHaveBeenCalledWith(['US'],'countryOptions')
+    
+  })
+  
+  it('should set values in criteria from localstorage',()=>{
+    component.createFormGroup()
+    localStorage.setItem('dated-flow-path-criteria-ondoc',JSON.stringify(dated_flow_path_criteria))
+    component.loadCriteriaFromStorage()
+    expect(component.pendingAlternates).toBeTruthy()
+  })
+
+  it('should set default country values',()=>{
+    component.createFormGroup()
+    localStorage.setItem('regionDetails',JSON.stringify(regionDetailsForUs))
+    localStorage.setItem('dated-flow-path-criteria-ondoc', '');
+    const spy=spyOn(component,'DropdownSelection')
+    component.loadCriteriaFromStorage()
+    expect(spy).toHaveBeenCalledWith(['US'],'countryOptions')
+   });
+
+   it('should disable enable apply button',()=>{
+    component.selectedStartDate = "2022-06-01",
+    component.selectedEndDate = "2022-07-27"
+    let service=component.searchCriteriaForm.controls['service'];
+    let origCtry=component.searchCriteriaForm.controls['origCtry'];
+    let origSlic=component.searchCriteriaForm.controls['origSlic'];
+    let origSort=component.searchCriteriaForm.controls['origSort'];
+    let destCtry=component.searchCriteriaForm.controls['destCtry'];
+    let destSlic=component.searchCriteriaForm.controls['destSlic'];
+    service.setValue("1DA")
+    origCtry.setValue("US")
+    origSlic.setValue("2000")
+    origSort.setValue(".")
+    destCtry.setValue("US")
+    destSlic.setValue("US")
+    component.canDisableApply()
+    expect(component.canDisableApply()).toBeFalsy()
+   });
+
+it('should call getDataForUndockWindow function',()=>{
+  component.selectedStartDate = "2022-07-27"
+  component.selectedEndDate ="2022-07-27"
+  component.searchCriteriaForm = component.createFormGroup()
+  component.searchCriteriaForm.controls['service'].patchValue([mockCriteria['service']]);
+  component.searchCriteriaForm.controls['origCtry'].patchValue([mockCriteria['origCtry']]);
+  component.searchCriteriaForm.controls['origSlic'].patchValue([mockCriteria['origSlic']]);
+  component.searchCriteriaForm.controls['origSort'].patchValue([mockCriteria['origSort']]);
+  component.searchCriteriaForm.controls['service'].patchValue([mockCriteria['destCtry']]);
+  component.searchCriteriaForm.controls['destSlic'].patchValue([mockCriteria['destSlic']]);
+  component.getDataForUndockWindow();
+  expect(component.datedFlowPathRequest).toBeDefined()
+  expect(component.flowPathCount).toEqual([])
+})
+
+  it('should test getData based on Criteria', () => {
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        showLoadingOverlay: () => { },
+        setRowData: () => { },
+        setFilterModel: () => { }
+      } as any,
+      columnApi: {
+        resetColumnState: () => { },
+        applyColumnState:() => { }
+      } as any
+    }
+    let service=component.searchCriteriaForm.controls['service'];
+    let origCtry=component.searchCriteriaForm.controls['origCtry'];
+    let origSlic=component.searchCriteriaForm.controls['origSlic'];
+    let origSort=component.searchCriteriaForm.controls['origSort'];
+    let destCtry=component.searchCriteriaForm.controls['destCtry'];
+    let destSlic=component.searchCriteriaForm.controls['destSlic'];
+    service.setValue("1DA")
+    origCtry.setValue("US")
+    origSlic.setValue("2000")
+    origSort.setValue(".")
+    destCtry.setValue("US")
+    destSlic.setValue("US")
+    expect(component.searchCriteriaForm.valid).toBeTruthy();
+    const spy = spyOn(component, "getData");
+    component.submitSearch();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should test is searchCriteriaForm invalid', () => {
+    component.gridOptions = {
+      api: {
+        applyTransactionAsync: () => { },
+        showLoadingOverlay: () => { },
+        setRowData: () => { },
+        setFilterModel: () => { },
+        getAllColumns:()=>{}
+      } as any,
+      columnApi: {
+        resetColumnState: () => { },
+        applyColumnState:() => { }
+      } as any
+    }
+    let service=component.searchCriteriaForm.controls['service'];
+    let origCtry=component.searchCriteriaForm.controls['origCtry'];
+    let origSlic=component.searchCriteriaForm.controls['origSlic'];
+    let origSort=component.searchCriteriaForm.controls['origSort'];
+    let destCtry=component.searchCriteriaForm.controls['destCtry'];
+    let destSlic=component.searchCriteriaForm.controls['destSlic'];
+    service.setValue("")
+    origCtry.setValue("")
+    origSlic.setValue("")
+    origSort.setValue("")
+    destCtry.setValue("")
+    destSlic.setValue("")
+    expect(component.searchCriteriaForm.valid).toBeFalsy();
+    component.submitSearch();
+   
+  });
+
+  it('should test toggle search panel', () => {
+    component.showSearchPanel = true;
+    component.toggleSearchPanel();
+    expect(component.showSearchPanel).toBeFalsy();
+  });
+  //Test case for onOrigSlicInputData
+  it('it should call onOrigSlicInputData', () => {
+    component.onOrigSlicInputData(slicData)
+    expect(component.slicLoading).toBeFalsy()
+    expect(component.origSlicOptions).not.toBeFalsy()
+  })
+   //Test Caseif the user Input is greater than 2, API is called to fetch data*/
+   it('Should call keyUpEvent ', () => {
+    let event={
+      target:{
+        value :'21'
+      },
+      keyCode:49
+    }
+    const spy = spyOn(component.origSlicInput,'next');
+    component.keyUpEventDelay(event,'origSlicInput');
+   expect(spy).toHaveBeenCalledWith(event.target.value)
+    
+  })
+
+  it('should hide confirmation modal', () => {
+    component.showSlicInfo=false;
+    component.showSlicGridInfo=false;
+    component.hideConfirmationModal();
+    expect(component.showSlicInfo).toBeFalsy();
+    expect(component.showSlicGridInfo).toBeFalsy();
+  });
+
+  it('should export to excel', () => {
+    var excelParams = {
+      fileName: 'DatedFlow',
+      columnKeys: [],
+      sheetName: 'Flow-1'
+    }
+    component.gridOptions = {
+      api: {
+        
+        exportDataAsCsv:(excelParams) =>{
+
+        }
+      }as any,
+     
+      columnApi: {
+      getColumnState: () =>{},
+      applyColumnState:() => { },
+      getAllDisplayedColumns: () =>[ {
+      getColDef:()=>{
+        return {
+            headerName :''
+        }
+        }
+      },
+      {
+        getColDef:()=>{
+          return {
+              headerName :'Origin Slic'
+          }
+          }
+      }]
+      
+       } as any
+    }
+    const spy = spyOn(component.gridOptions.api, "exportDataAsCsv");
+    component.export();
+    expect(spy).toHaveBeenCalled();
+   
+  });
+
+  //Positive test case for filter change
+  it('should call filter changed', () => {
+    component.gridOptions = {
+      api: {
+         getFilterModel: () => {}
+         } as any,
+         columnApi: {
+          resetColumnState: () => { },
+          applyColumnState:() => { }
+        } as any
+    }
+    const spy = spyOn(localStorage, "setItem");
+    component.filterChanged();
+    expect(spy).toHaveBeenCalled();
+   
+  });
+
+   //negative scenario for gridStyle
+   it('should call grid Style', () => {
+    component.isGLSubWindow = false;
+    component.showSearchPanel = true;
+    let result =  component.getGridStyle();
+    expect(result).toBe('grid-style')
+  });
+//positive test case scenarios for gridstyle
+  it('should call grid Style', () => {
+    component.isGLSubWindow = true;
+    component.showSearchPanel = true;
+    let result =  component.getGridStyle();
+    expect(result).toBe('gl-grid-style')
+  });
+
+  //Test case for Streaming Data API call
+    it('Request body should not empty', () => {
+      localStorage.setItem('dated-flow-path-appended-criteria', '[]')
+      component.gridOptions = {
+        api: {
+          applyTransactionAsync: () => { },
+          flushAsyncTransactions: () => { },
+          hideOverlay:()=>{ }     
+        } as any,
+        columnApi: {
+          applyColumnState:() => { },
+          getAllColumns: () =>[ {
+          getColDef:()=>{
+            return {
+                headerName :'',
+                colId: ''
+            }
+            }
+          },
+          {
+            getColDef:()=>{
+              return {
+                  headerName :'Orig SLIC',
+                  colId: 'SLIC'
+              }
+              }
+          }],
+          setColumnsVisible:()=> {}
+          
+           } as any
+           
+      }
+      component.fetchStreamingData()
+      expect(component.datedFlowPathRequest).not.toBeNull()
+    });
+
+    //Test case for common API calls
+  it('Call Function to get Common api data', () => {
+    component.getCommonApiValues();
+    expect(component.serviceOptions).not.toBeNull()
+    expect(component.countryOptions).not.toBeNull()
+    expect(component.sortOptions).not.toBeNull()
+   });
+   //Positive test case for sortingChanged
+   it('Local storage should have value for key: <sortingStatus>', () => {
+    component.gridOptions = {
+      columnApi: {
+        getColumnState: () =>{},
+        resetColumnState: () => { },
+        applyColumnState:() => { }
+      } as any,
+      
+    }
+    component.sortChanged()
+    expect(localStorage.getItem('dated-flow-path-sortingStatus')).not.toBeNull()
+  })
+
+   it('should fetch sort info on cell click of origin sort column', () => {
+    const params = {
+      colDef: {
+        headerName: 'Orig Sort',
+        colId:'originSort'
+      },
+      data: {
+        datedFlowPathOrigin:{
+          origCtry: 'US',
+          origSrt: 'S2',
+          origSlic: '0119'
+        }
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.showNoSortTemp?component.showNoSortTemp:true).toBeTruthy();
+    expect(!component.showSortTemp?component.showSortTemp:false).toBeFalsy();
+    expect(component.showSortTranslate).toBeTruthy()
+  }); 
+
+  it('should fetch sort info on cell click of via sort column', () => {
+    const params = {
+      colDef: {
+        headerName: 'ViaSrt',
+        colId:'fp_Sort_1'
+      },
+      data: {
+        datedFlowPathVia:[{
+          viaCtry: 'US',
+          viaSort: 'S2',
+          viaSlic: '2345'
+        }]
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.showNoSortTemp?component.showNoSortTemp:true).toBeTruthy();
+    expect(!component.showSortTemp?component.showSortTemp:false).toBeFalsy();
+    expect(component.showSortTranslate).toBeTruthy()
+  });
+  
+  it('should fetch slic info on cell click of via slic column', () => {
+    const params = {
+      colDef: {
+        headerName: 'ViaSLIC',
+        //field: 'viaSlic',
+        colId:'fp_SLIC_1'
+      },
+      data: {
+        datedFlowPathVia:[{
+          viaCtry: 'US',
+          viaSlic: '2345'
+        }]
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.slicInfo).toEqual('Slic Info: US 0119');
+    expect(component.showSlicInfo).toBeTruthy();
+  });
+
+  it('should fetch slic info on cell click of origin slic column', () => {
+    const params = {
+      colDef: {
+        headerName: 'Orig SLIC',
+        colId:'originSLIC'
+      },
+      data: {
+        datedFlowPathOrigin:{
+          origCtry: 'US',
+          origSlic: '2345'
+        }
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.slicInfo).toEqual('Slic Info: US 0119');
+    expect(component.showSlicInfo).toBeTruthy();
+  });  
+  
+  it('should fetch slic info on cell click of delivey slic column', () => {
+    const params = {
+      colDef: {
+        headerName: 'Del SLIC',
+        colId:'delSLIC'
+      },
+      data: {
+        datedFlowPathDestination:{
+          dlyCtry: 'US',
+          dlySlic: '2345'
+        }
+      }
+    }
+    component.onCellClicked(params);
+    expect(component.slicInfo).toEqual('Slic Info: US 0119');
+    expect(component.showSlicInfo).toBeTruthy();
+  }); 
+  
+  //Positive test case scenario for onOrigSlicInputSwitchMap
+  it('onOrigSlicInputSwitchMap', () => {
+    let request = {
+      ctry: "US",
+      search:  "23"  
+    };
+    component.onOrigSlicInputSwitchMap("23");
+    expect(component.frameSlicSearchRequest("US","23")).toEqual(request);
+  });
+   //Negatice test case scenario for onOrigSlicInputSwitchMap
+   it('onOrigSlicInputSwitchMap', () => {
+    component.onOrigSlicInputSwitchMap("2");
+    expect(component.slicLoading).toBeFalsy();
+  });
+
+    //Test case for onOrigSlicInputData
+    it('it should call onOrigSlicInputData', () => {
+      component.onOrigSlicInputData(slicData)
+      expect(component.slicLoading).toBeFalsy()
+      expect(component.origSlicOptions).not.toBeFalsy()
+    })
+
+    it('should fetch data', () => {
+      component.searchCriteriaForm =  component.createFormGroup()
+     const spy = spyOn(component,'fetchStreamingData')
+      component.lastCountOfRecordsFromStream =10;
+      component.gridOptions = {
+        api: {
+          applyTransactionAsync: () => { },
+          flushAsyncTransactions: () => { },
+          showLoadingOverlay: () => { },
+            setRowData: () => { },
+            hideOverlay :()=>{ }
+           
+        } as any,
+        columnApi: {
+          applyColumnState:() => { },
+          getAllColumns: () =>[ {
+          getColDef:()=>{
+            return {
+                headerName :'',
+                colId: ''
+            }
+            }
+          },
+          {
+            getColDef:()=>{
+              return {
+                  headerName :'Orig SLIC',
+                  colId: 'SLIC'
+              }
+              }
+          }],
+          setColumnsVisible:()=> {},
+          autoSizeAllColumns:() => {}
+          
+           } as any
+      }
+      localStorage.setItem('dated-flow-path-appended-criteria' , JSON.stringify([])); 
+      localStorage.setItem('datedFlowPathFormSubmited', '[]')     
+      component.getData();
+      expect(spy).toHaveBeenCalled()
+     });
+
+
+     it('should toggle the date picker click',()=>{
+       component.clicked = false
+       component.touch()
+       expect(component.clicked).toBeTruthy()
+     })
+
+     it('Should Call resetTable', () => {
+      component.gridOptions = {
+        api: {
+          applyTransactionAsync: () => { },
+          hideOverlay: () => { },
+          setRowData: () => { },
+          setFilterModel: () => { },
+          showLoadingOverlay:()=>{}
+        } as any,
+        columnApi: {
+          applyColumnState:() => { },
+          resetColumnState: () => { }
+        } as any
+      }
+      component.resetTable();
+      expect(component.appendedCriteria).toEqual([])
+      expect(component.flowPathCount).toEqual([])
+      expect(localStorage.getItem('dated-flow-path-appended-criteria')).toEqual('')
+      expect(localStorage.getItem('dated-flow-path-criteria-state')).toEqual('')
+      expect(localStorage.getItem('datedFlowPathFormSubmited')).toEqual('')
+      expect(localStorage.getItem('dated-flow-path-criteria-ondoc')).toEqual('')
+     });
+
+
+    it('should call selectchanges with params pendingAlt',()=>{
+      component.state=0;
+      const spy=spyOn(component,"getMinMaxDates");
+      component.selectchanges("pendingAlt");
+      component.pendingAlternates=false;
+      expect(spy).toHaveBeenCalled();
+      component.minMaxDate = minMaxForPending
+      expect(component.startDateValue).toEqual(undefined)
+      expect(component.endDateValue).toEqual(undefined)
+      expect(component.selectedEndDate).toEqual(undefined)
+      expect(component.selectedStartDate).toEqual(undefined)
+    })
+
+    it('should call selectchanges with params empty string and region EU',()=>{
+      component.state=1;
+      component.selectchanges('');
+      component.pendingAlternates=false;
+      component.startDateValue = ""
+      component.endDateValue = ""
+      component.selectedEndDate = ""
+      component.selectedStartDate = ""
+      expect(component.startDateValue).toBeDefined()
+      expect(component.endDateValue).toBeDefined()
+      expect(component.selectedEndDate).toBeDefined()
+      expect(component.selectedStartDate).toBeDefined()
+    })
+
+    it('should call selectchanges with params empty string',()=>{
+    localStorage.setItem('regionDetails',JSON.stringify(regionDetailsForUs))
+    component.state=0;
+      const spy=spyOn(component,"getMinMaxDates");
+      component.selectchanges("");
+      component.pendingAlternates=false;
+      expect(spy).toHaveBeenCalled();
+      component.minMaxDate = minMaxForPending
+      expect(component.startDateValue).toEqual(undefined)
+      expect(component.endDateValue).toEqual(undefined)
+      expect(component.selectedEndDate).toEqual(undefined)
+      expect(component.selectedStartDate).toEqual(undefined)
+    })
+
+    it('Should call m',()=>{
+      let country="US";
+      let userInput="23";
+      let request = {
+        ctry: "US",
+        search:  "23"  
+      };
+      component.ondestSlicInputSwitchMap("23");
+      expect(component.frameSlicSearchRequest("US","23")).toEqual(request);
+      component.destSlicLoading = true
+      component.searchCriteriaForm.controls['destSlic'].reset([]);
+    })
+
+    it('Should call ondestSlicInputData',()=>{
+      component.ondestSlicInputData(slicData)
+      expect(component.slicLoading).toBeFalsy()
+      expect(component.destSlicOptions).not.toBeFalsy()
+    })
+
+    
+    it('Should call setColumnVisibility',()=>{
+      component.gridOptions = {
+        columnApi: {
+          applyColumnState:() => { },
+          getAllColumns: () => [{ 
+            map:()=>{
+              return {}
+              }
+          }],
+          setColumnsVisible:()=>[{}]
+        } as any
+      }
+     
+      // component.gridOptions.columnApi?.getAllColumns().map(mapToColId)
+      component.setColumnVisibility();
+      //component.maxFlowPathAvailable=4;
+      let defaultColumnIds = ['date', 'service', 'cal', 'tnt', 'originCC', 'originSLIC', 'originSort', 'delCC', 'delSLIC']
+      let finalColId=['date', 'service', 'cal', 'tnt', 'originCC', 'originSLIC', 'originSort', 'delCC', 'delSLIC','fp_CC_1','fp_SLIC_1','fp_Sort_1','fp_TNT_1','fp_Date_1','fp_CC_2','fp_SLIC_2','fp_Sort_2','fp_TNT_2','fp_Date_2'];
+      let flowPathCol = ['fp_CC_1','fp_SLIC_1','fp_Sort_1','fp_TNT_1','fp_Date_1','fp_CC_2','fp_SLIC_2','fp_Sort_2','fp_TNT_2','fp_Date_2'];
+      expect(defaultColumnIds.concat(flowPathCol)).toEqual(finalColId);
+    })
+    it('should fetch sort info on cell click of origin sort column', () => {
+      const params = {
+        colDef: {
+          headerName: 'Orig Sort',
+          colId:'originSort'
+        },
+        data: {
+          datedFlowPathOrigin:{
+            origCtry: 'US',
+            origSrt: 'S2',
+            origSlic: '0119'
+          }
+        }
+      }
+      component.onCellClicked(params);
+     expect(component.showSortTranslate).toBeTruthy()
+    });
+
+    it('should test grid creation of dated flow path', () => {
+      let gridData = []
+      gridData = component.createColumnDef()
+      if(gridData && gridData.length > 0) {
+       gridData.forEach(obj => {
+          if (obj.children && obj.children.length > 0) {
+            obj.children.forEach((childEl:any) => {
+              if (childEl.hasOwnProperty('cellRenderer')) {
+                //for values having length 1
+                expect(childEl.cellRenderer(defaultParams)).toBeDefined()
+                // for values having length 2
+                expect(childEl.cellRenderer(specialParams)).toBeDefined()
+              }
+              if (childEl.hasOwnProperty('valueGetter')) {
+                   //for values having length 1
+                   expect(childEl.valueGetter(defaultParams)).toBeDefined()
+                   // for values having length 2
+                   expect(childEl.valueGetter(specialParams)).toBeDefined()
+              }
+            })
+          }
+    
+        })
+      }
+    })
+    it('should test dropdown selection',()=>{
+      let result = {id:"2DA",name:"2DA"}
+      component.serviceOptions = [{id:"1DA",name:"1DA"},{id:"2DA",name:"2DA"},{id:"3DS",name:"3DS"},{id:"GND",name:"GND"}]
+      component.DropdownSelection(["2DA"],'serviceOptions');
+      expect(component.serviceOptions[0]).toEqual(result) 
+      expect(component.DropdownSelection(['2DA'],'serviceOptions')).toBeUndefined()
+    })
+    afterAll(() => {
+      TestBed.resetTestingModule();
+    });
+});
+
+
+
+
