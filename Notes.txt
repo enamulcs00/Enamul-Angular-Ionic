@@ -1,12 +1,23 @@
-Dear [Bug Reporter's Name],
+Open sidebar
+ChatGPT 3.5
 
-I hope this email finds you well. I am writing to you regarding the bug report you submitted recently. As I've been primarily focused on the GLD (Generic Linkage Descriptor) aspect of our project, I kindly request your assistance in recreating the bug in the High-Level Design (HLD) portion.
+User
+Write email to inform manager Due to missing value of AccountType in api response L3 page is not loading that's why bug reporter reported bug #1 and #2
 
-To ensure thorough investigation and resolution, could you please provide detailed steps to reproduce the bug in the HLD? Any additional context or specific scenarios would be greatly appreciated.
+ChatGPT
+Subject: Issue with L3 Page Loading Due to Missing AccountType Value in API Response
 
-Your collaboration in this matter is invaluable, and together, we can ensure the smooth functioning of our project.
+Dear [Manager's Name],
 
-Thank you in advance for your time and cooperation. Looking forward to your prompt response.
+I hope this email finds you well. I wanted to bring to your attention an issue we've encountered regarding the loading of the L3 page due to a missing value of AccountType in the API response.
+
+As a result of this missing value, our L3 page is failing to load properly, which has been reported as Bug #1 and Bug #2 by our bug reporter. This issue is impacting the functionality and usability of the L3 page for our users.
+
+Our development team is currently investigating the root cause of this issue and working on implementing a solution to ensure the correct loading of the L3 page. We are prioritizing this issue to minimize any disruption to our users' experience.
+
+I will keep you updated on the progress of our investigation and any developments regarding the resolution of this issue. If you have any questions or need further information, please feel free to reach out to me.
+
+Thank you for your attention to this matter.
 
 Best regards,
 [Your Name]
@@ -15,7 +26,11 @@ Best regards,
 
 
 
+Is this conversation helpful so far?
+
+
 
 Message ChatGPT…
 
-ChatGPT can make mistakes. Consider checking important 
+ChatGPT can make mistakes. Consider checking important information.
+ChatGPT
