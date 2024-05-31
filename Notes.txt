@@ -1,20 +1,17 @@
-Subject: Sonar Issue - High Cognitive Complexity in [File Name] - Separate Story Needed
+## Subject: Urgent: Missing Data for Partner A, BOMI & Watchlist impacting L2 & L3 Testing
 
-Hi [Manager Name],
+Hi Data Team,
 
-I'm writing to inform you about a critical Sonar issue I identified in [File Name] during our ongoing vulnerability fixes.
+I'm writing to inform you that we're currently experiencing issues testing our L2 and L3 pages due to missing data for "Partner A," "BOMI," and "Watchlist."
 
-The code in this file has a cognitive complexity of 223, which significantly exceeds the maximum allowed threshold of 15. This high complexity indicates very intricate code that's difficult to understand, maintain, and potentially prone to errors.
+This lack of data is significantly hindering our ability to perform comprehensive testing and identify any potential bugs or functionality issues on these pages.
 
-Due to the complexity of this code, addressing the Sonar issue will likely require more time than the current vulnerability fixes we're working on. To ensure we can dedicate the necessary resources and avoid delays, I recommend creating a separate story specifically for tackling this high cognitive complexity issue.
+We kindly request your assistance in investigating this matter and expediting the resolution to ensure we have the necessary data for thorough testing. 
 
-This separate story will allow us to:
+Please let us know if you require any further information from our end to assist with the investigation.
 
-* Clearly define the scope and effort required to address the high complexity.
-* Prioritize and schedule the fix appropriately.
-* Avoid potential delays in the ongoing vulnerability fixes.
+Thank you for your prompt attention to this urgent matter.
 
-Please let me know if you'd like to discuss this further or if you have any questions.
+Best regards,
 
-Thanks,
 [Your Name]
