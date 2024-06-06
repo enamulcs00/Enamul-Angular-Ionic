@@ -1,17 +1,36 @@
-## Subject: Urgent: Missing Data for Partner A, BOMI & Watchlist impacting L2 & L3 Testing
+rOpen sidebar
+ChatGPT
 
-Hi Data Team,
+Write a mail to manager inform him that you updated for planned leave one month ago in ongoing leave tracker Excel sheet, I will utilise my comp off As I was available on Sanday and election day
+ChatGPT
+Subject: Utilization of Comp Off for Planned Leave
 
-I'm writing to inform you that we're currently experiencing issues testing our L2 and L3 pages due to missing data for "Partner A," "BOMI," and "Watchlist."
+Dear [Manager's Name],
 
-This lack of data is significantly hindering our ability to perform comprehensive testing and identify any potential bugs or functionality issues on these pages.
+I hope this email finds you well.
 
-We kindly request your assistance in investigating this matter and expediting the resolution to ensure we have the necessary data for thorough testing. 
+I am writing to inform you that I have updated my planned leave in the ongoing leave tracker Excel sheet one month ago. I intend to utilize my comp off for these planned leaves, as I was available and working on Sunday and during the election day.
 
-Please let us know if you require any further information from our end to assist with the investigation.
+Please let me know if you require any further information or documentation.
 
-Thank you for your prompt attention to this urgent matter.
+Thank you for your understanding.
 
 Best regards,
-
 [Your Name]
+[Your Position]
+
+
+
+
+
+
+Is this conversation helpful so far?
+
+
+
+
+
+Message ChatGPT
+
+ChatGPT can make mistakes. Check important info.
+ChatGPT
