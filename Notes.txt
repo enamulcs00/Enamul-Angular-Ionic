@@ -1,15 +1,18 @@
-r## Subject: Urgent: VM Slowness Impeding Work - Update Request in UltiMatix (RFC#[Request Number])
+rSubject: Request for Symphony Application Access - Prod Environment (ADID: DDW6FPM, GDID: CW000002020)
 
-Dear [Manager Name],
+Hi Sridevi,
 
-I am writing to inform you that I have been experiencing significant slowness with my virtual machine (VM) for over a week now. This has been severely impacting my ability to work efficiently. 
+I hope this email finds you well.
 
-I previously submitted a request in UltiMatix (RFC#[Request Number]) to the helpdesk for an update to the Citrix version. However, they have requested that I attach a valid addendum/MSA/SOW with all required project information to proceed.
+I'm writing to request access to the Symphony application for the production environment.
 
-Unfortunately, I don't have the necessary knowledge or access to handle these contractual documents (addendum/MSA/SOW). I would greatly appreciate it if you could kindly intervene and "do the needful" to expedite the Citrix update request. This slowness is significantly hindering my productivity, and a quicker resolution would be very beneficial.
+My details are as follows:
 
-Please let me know if you require any further information from me.  Thank you for your time and assistance.
+* ADID: DDW6FPM
+* GDID: CW000002020
+* UPS Email ID: ehaque@ups.com
 
-Sincerely,
+I would be grateful if you could grant me access to Symphony for the prod environment at your earliest convenience. Please let me know if you require any further information from me.
 
+Thanks,
 [Your Name]
