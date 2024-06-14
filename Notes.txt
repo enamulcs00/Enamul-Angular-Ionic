@@ -1,18 +1,12 @@
-rSubject: Request for Symphony Application Access - Prod Environment (ADID: DDW6FPM, GDID: CW000002020)
+Subject: Bug #188776 Fixed - Testing Required in QA Environment
 
-Hi Sridevi,
+Hi [QA Name],
 
-I hope this email finds you well.
+I'm writing to inform you that bug #188776 has been fixed and is now ready for testing in the QA environment.
 
-I'm writing to request access to the Symphony application for the production environment.
+Please take some time to test the fix and verify that the issue has been resolved. If everything looks good, please let me know so I can proceed with moving the fix to the UAT environment.
 
-My details are as follows:
-
-* ADID: DDW6FPM
-* GDID: CW000002020
-* UPS Email ID: ehaque@ups.com
-
-I would be grateful if you could grant me access to Symphony for the prod environment at your earliest convenience. Please let me know if you require any further information from me.
+If you encounter any further issues or have any questions, please don't hesitate to reach out.
 
 Thanks,
 [Your Name]
