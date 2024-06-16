@@ -1,0 +1,37 @@
+1. CRUD Websites options: 
+
+https://www.google.com/search?q=simple+crud+operation+in+asp.net+core&oq=simplest+crud+operation+in+&gs_lcrp=EgZjaHJvbWUqCQgEEAAYDRiABDIGCAAQRRg5MgkIARAAGA0YgAQyCQgCEAAYDRiABDIJCAMQABgNGIAEMgkIBBAAGA0YgAQyCQgFEAAYDRiABDIJCAYQABgNGIAEMgkIBxAAGA0YgAQyCQgIEAAYDRiABDIJCAkQABgNGIAE0gEJMTcxNjlqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#ip=1
+
+2. CRUD - 1
+
+https://medium.com/@syantien/implementing-crud-operations-in-asp-net-core-api-341802e0d4ea
+
+3. CRUD - 2
+
+https://www.techieclues.com/articles/create-and-build-an-asp-net-core-angular-crud-application-part-1
+
+4. CRUD - 3
+
+https://geeksarray.com/blog/crud-operations-using-aspnetcore
+
+5. CRUD - 4
+
+https://www.scholarhat.com/tutorial/aspnet/crud-operations-using-angular-and-entity-framework-core
+
+6. CRUD - 5
+
+https://developer.mescius.com/blogs/how-to-perform-crud-operations-with-entity-framework-and-aspnet-core
+
+7. CRUD - 6
+
+https://www.freecodecamp.org/news/build-crud-operations-with-dotnet-core-handbook/
+
+8. CRUD - 7
+
+https://www.shivatutorials.com/2024/01/angular-17-basic-crup-operation-using.html
+
+9. CRUD - 8
+
+
+
+10. CRUD - 9
