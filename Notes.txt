@@ -1,12 +1,15 @@
-Subject: Bug #188776 Fixed - Testing Required in QA Environment
+## Subject: Urgent: VM Performance Issues - Slowness and Freezing
 
-Hi [QA Name],
+Dear [Manager Name],
 
-I'm writing to inform you that bug #188776 has been fixed and is now ready for testing in the QA environment.
+I am writing to inform you that I am experiencing significant performance issues with the virtual machine (VM) I am currently using. The VM is running very slow and frequently freezing, which is causing major disruptions to my work.
 
-Please take some time to test the fix and verify that the issue has been resolved. If everything looks good, please let me know so I can proceed with moving the fix to the UAT environment.
+These freezes completely halt my ability to work, significantly impacting my productivity. 
 
-If you encounter any further issues or have any questions, please don't hesitate to reach out.
+I kindly request your assistance in resolving this issue as soon as possible. If there are any troubleshooting steps I can take on my end, please let me know.
 
-Thanks,
+Thank you for your time and attention to this urgent matter.
+
+Best regards,
+
 [Your Name]
