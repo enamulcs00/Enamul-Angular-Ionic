@@ -1,15 +1,1 @@
-## Subject: Urgent: VM Performance Issues - Slowness and Freezing
 
-Dear [Manager Name],
-
-I am writing to inform you that I am experiencing significant performance issues with the virtual machine (VM) I am currently using. The VM is running very slow and frequently freezing, which is causing major disruptions to my work.
-
-These freezes completely halt my ability to work, significantly impacting my productivity. 
-
-I kindly request your assistance in resolving this issue as soon as possible. If there are any troubleshooting steps I can take on my end, please let me know.
-
-Thank you for your time and attention to this urgent matter.
-
-Best regards,
-
-[Your Name]
