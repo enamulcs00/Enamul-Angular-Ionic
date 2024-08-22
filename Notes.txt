@@ -1,16 +1,14 @@
-ySubject: Revision Needed for TMS HLD - Base Issue Identified
+Subject: Update on Bug #210838 - UI Fix Applied, Backend Support Needed
 
-Hi Inayat,
+Hi [Team Lead's Name],
 
-I hope this message finds you well.
+I wanted to inform you that I have fixed the UI issue related to bug #210838. However, it appears that the necessary data is still not being received from the server.
 
-Upon a thorough review of the TMS High-Level Design (HLD), I have identified a fundamental issue with the base structure. Unfortunately, this issue necessitates a comprehensive revision of the entire code.
+Could you please assign this bug to a backend developer to investigate and resolve the issue on their side?
 
-Given the extent of the changes required, this process will take some time to complete. I will keep you updated on our progress and any developments as we proceed with the necessary revisions.
+Let me know if you need any further details from my end.
 
-Thank you for your understanding and patience as we work through this.
-
-Best regards,
+Thanks,
 [Your Name]
 [Your Position]
 
