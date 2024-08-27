@@ -1,16 +1,21 @@
-Subject: Update on Bug #210838 - UI Fix Applied, Backend Support Needed
+Subject: Request to Restart VM #WKSP00118B50
 
-Hi [Team Lead's Name],
+Hi [Manager's Name],
 
-I wanted to inform you that I have fixed the UI issue related to bug #210838. However, it appears that the necessary data is still not being received from the server.
+I hope this message finds you well.
 
-Could you please assign this bug to a backend developer to investigate and resolve the issue on their side?
+I am reaching out to inform you that my VM, identified as #WKSP00118B50, has been switched off. I attempted to contact the NOC multiple times at the provided number, 1-866-662-4877, but it seems that the number is invalid. This number was given to me by the UPS helpdesk team.
 
-Let me know if you need any further details from my end.
+Given the urgency of the situation, could you please assist in restarting the VM on your level? Your help would be greatly appreciated as it is impacting my ability to complete my tasks.
 
-Thanks,
+Please let me know if you need any further information from my end.
+
+Thank you for your support.
+
+Best regards,
 [Your Name]
 [Your Position]
+[Your Contact Information]
 
 
 
