@@ -1,29 +1,14 @@
-Subject: Request to Restart VM #WKSP00118B50
+Subject: Urgent: Screen Design Required for User Story #214641
 
-Hi [Manager's Name],
+Hi Peter,
 
-I hope this message finds you well.
+I hope you're doing well.
 
-I am reaching out to inform you that my VM, identified as #WKSP00118B50, has been switched off. I attempted to contact the NOC multiple times at the provided number, 1-866-662-4877, but it seems that the number is invalid. This number was given to me by the UPS helpdesk team.
+Could you please share the screen design for the table in the case of **programCode APL and Non-APL** related to **user story #214641**? We need the design as soon as possible, as it is currently blocking us from implementing the exact features.
 
-Given the urgency of the situation, could you please assist in restarting the VM on your level? Your help would be greatly appreciated as it is impacting my ability to complete my tasks.
+Your prompt assistance on this would be greatly appreciated.
 
-Please let me know if you need any further information from my end.
+Thank you!
 
-Thank you for your support.
-
-Best regards,
-[Your Name]
-[Your Position]
-[Your Contact Information]
-
-
-
-
-
-
-
-
-
-
-ChatGPT can make 
+Best regards,  
+[Your Name]  
