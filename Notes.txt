@@ -1,14 +1,20 @@
-Subject: Urgent: Screen Design Required for User Story #214641
+Subject: Emergency Leave Request from 9th to 13th September 2024
 
-Hi Peter,
+Dear [Manager/Team Lead's Name],
 
-I hope you're doing well.
+I hope this message finds you well.
 
-Could you please share the screen design for the table in the case of **programCode APL and Non-APL** related to **user story #214641**? We need the design as soon as possible, as it is currently blocking us from implementing the exact features.
+I am writing to inform you that I will need to take emergency leave from 9th September 2024 to 13th September 2024. My father has been experiencing significant hand pain for the past 3-4 months, and I need to consult with a doctor regarding his treatment during this period.
 
-Your prompt assistance on this would be greatly appreciated.
+For this leave, I would like to utilize my comp off leave. I have ensured that all my current tasks are up to date, and I will coordinate with the team to ensure a smooth workflow in my absence. If there are any urgent matters, please feel free to reach out to me via phone or email.
 
-Thank you!
+Thank you for your understanding and support in this matter.
 
-Best regards,  
-[Your Name]  
+Best regards,
+[Your Full Name]
+[Your Position]
+
+
+
+
+Don't share sensitive info. Chats may be reviewed and used to train our models. Learn more
