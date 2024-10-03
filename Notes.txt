@@ -1,12 +1,18 @@
-Subject: Request for API Response and Clarification on Warning/Error Messages
+Subject: Discrepancy Between Backend Payload and UI Design in ADO
 
-Hi [Backend Team],
+Hi Peter,
 
 I hope you're doing well.
 
-Could you please share the API response for the story #216652? Additionally, I would appreciate it if you could provide a list of all possible reasons that could trigger warning and error messages on the UI related to this story.
+I wanted to bring to your attention that the payload provided by the backend team is not matching the UI design attached in the ADO. It seems that either the UI flow is not correct, or the payload itself is incorrect.
 
-Thank you in advance for your assistance!
+In the ADO, I’ve already mentioned that the company selection should drive the selection of userRole, billingAccess, adminAccess, and analyticsAccess for each company. 
 
-Best regards,
+Could you please confirm from where we are populating the company in each row of the table and on what basis this is being done?
+
+Also, could you update the ADO with more detailed information regarding this issue?
+
+Looking forward to your feedback.
+
+Best regards,  
 [Your Name]
