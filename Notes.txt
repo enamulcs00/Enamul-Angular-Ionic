@@ -1,18 +1,12 @@
-Subject: Discrepancy Between Backend Payload and UI Design in ADO
+Subject: Clarification Needed on Schedule Section in Figma Design
 
 Hi Peter,
 
-I hope you're doing well.
+Could you please review and provide a detailed explanation of the **Schedule** section according to the Figma design? Specifically, we need clarity on the **start date** and **end date** fields to ensure we're aligned with the intended flow and functionality.
 
-I wanted to bring to your attention that the payload provided by the backend team is not matching the UI design attached in the ADO. It seems that either the UI flow is not correct, or the payload itself is incorrect.
+In ADO, there seem to be several confusing points related to this story. Could you please summarize these details efficiently so we have a clear understanding moving forward?
 
-In the ADO, I’ve already mentioned that the company selection should drive the selection of userRole, billingAccess, adminAccess, and analyticsAccess for each company. 
-
-Could you please confirm from where we are populating the company in each row of the table and on what basis this is being done?
-
-Also, could you update the ADO with more detailed information regarding this issue?
-
-Looking forward to your feedback.
+Thank you for your help!
 
 Best regards,  
 [Your Name]
