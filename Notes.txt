@@ -1,35 +1,9 @@
-Here’s a draft of the email:
-
----
-
-**Subject:** Clarification Required: "Who Can See This Banner" Details  
-
-Hi Peter,  
-
-I hope this email finds you well.  
-
-Could you please explain in detail how the "Who Can See This Banner" functionality is intended to work? Specifically, we would like to understand the factors determining the list in the drop-down for "Who Can See This Banner."  
-
-Currently, we observe that the following drop-downs are functioning independently:  
-- **Company**  
-- **Service**  
-- **Product Tier**  
-- **Business Model**  
-
-We need your guidance to confirm which of these options should populate the "Who Can See This Banner" drop-down. For example:  
-- Will it display the selected company?  
-- Will it reflect the selected service?  
-- Or will it be tied to the selected business model or product tier?  
-
-Additionally, it would be helpful if you could provide some screenshots or visuals to clarify this behavior further. This would ensure that we’re aligned on expectations.  
-
-Looking forward to your input.  
-
-Best regards,  
-[Your Name]  
-[Your Job Title]  
-[Your Contact Information]  
-
----
-
-Let me know if you’d like any further refinements!
+Subject: Planned Leave from 16th to 20th December 2024
+Dear Paresh,
+Please be informed that I will be on planned leave from 16th December 2024 to 20th December 2024 for a medical checkup related to my ongoing headache issue.
+I will be utilizing my pending compensatory offs to cover this leave period.
+Please let me know if any urgent tasks need to be prioritized or delegated during my absence.
+Thank you for your understanding.
+Best regards,
+[Your Name]
+[Your Designation]
