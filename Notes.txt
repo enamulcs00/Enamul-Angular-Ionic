@@ -1,9 +1,9 @@
-Subject: Planned Leave from 16th to 20th December 2024
+Subject: Unavailability on Sunday, December [Date]
 Dear Paresh,
-Please be informed that I will be on planned leave from 16th December 2024 to 20th December 2024 for a medical checkup related to my ongoing headache issue.
-I will be utilizing my pending compensatory offs to cover this leave period.
-Please let me know if any urgent tasks need to be prioritized or delegated during my absence.
+Please be informed that I will be unavailable on Sunday, December [Date], to provide support for the December release due to a personal commitment.
+I have already completed all assigned bugs and stories for the release.
+Please let me know if there are any urgent tasks or questions that need to be addressed before my absence.
 Thank you for your understanding.
 Best regards,
 [Your Name]
-[Your Designation]
+[Your Position]
