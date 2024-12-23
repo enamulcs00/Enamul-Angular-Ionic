@@ -1,9 +1,14 @@
-Subject: Unavailability on Sunday, December [Date]
-Dear Paresh,
-Please be informed that I will be unavailable on Sunday, December [Date], to provide support for the December release due to a personal commitment.
-I have already completed all assigned bugs and stories for the release.
-Please let me know if there are any urgent tasks or questions that need to be addressed before my absence.
-Thank you for your understanding.
-Best regards,
-[Your Name]
-[Your Position]
+**Subject:** Unable to Deploy ECMS Content Changes  
+
+Dear Dependra,  
+
+I hope this message finds you well.  
+
+I wanted to inform you that I am currently unable to proceed with the deployment of the ECMS content changes. [Add specific details about the issue, if any, e.g., technical challenges, pending approvals, or other constraints.]  
+
+Please let me know if there are any alternative approaches or if further assistance is needed to resolve this issue. I am happy to collaborate to ensure the deployment is completed successfully.  
+
+Looking forward to your guidance.  
+
+Best regards,  
+[Your Name]  
